@@ -1,6 +1,8 @@
+import os
 from src.data_extractor import DataDownloaderExtractor
 from src.data_transform import DataTransformer
-import os
+from src.data_load import AWSS3Loader
+
 
 def main():
 
@@ -20,6 +22,10 @@ def main():
     transformed_data = data_transformer.transform(extracted_data)
     data_transformer.save_transformed_data(transformed_data)
     print(transformed_data)
+
+
+    aws_s3_loader = AWSS3Loader()
+    aws_s3_loader.save_data(transformed_data, file_path="data_transformed/transformed_data.csv")
 
 
 
